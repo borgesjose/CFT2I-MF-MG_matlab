@@ -50,18 +50,13 @@ Theta_m_max = 72;
      
 %Aplicando o CN-PID-FG:
 
- %turnpoint = 500;%floor(rand*nptos);
-
-
 for i=1:nptos,
     if (i<=nptos/4)  ref(i)=10; end;
     if (i>nptos/4)   ref(i) = 50; end;
     if (i>nptos/2 & i<=3*nptos/4)  ref(i)=25; end;
     if (i>3*nptos/4)   ref(i) = 60; end;
 end ;
-% for i=1:nptos,
-%     ref(i)=30;
-% end ;
+
 
 for i=1:nptos,
     if(i>nptos/2 & i< 5+nptos/2 ) 
@@ -78,7 +73,7 @@ u(1)=0 ; u(2)=0 ; u(3)=0; u(4)=0;
 
 erro(1)=1 ; erro(2)=1 ; erro(3)=1; erro(4)=1;
 
-L=4;%Provavelmente o valor de limite das memberships functions
+L = 2;%Provavelmente o valor de limite das memberships functions
 
 %%
 %randpmo criado aleatoriamente por mim
@@ -100,16 +95,12 @@ ruido = rlevel*rand(1,1000);
          if (PID == 0)
              %Aqui na chamada da função é possivel escolher entre linear input(LI) e não linear input(NLI)
 
-             Am(i) =Inferencia_T2_expandido(erro(i),rate(i),L,Param,'LI');
+             Am(i) = Inferencia_T2_expandido(erro(i),rate(i),L,Param,'LI');
             
              Ami = Am(i)*Am_max + Am_min*(1 - Am(i));
          else
              Ami = 1; end;
-         
-          
-
-      
-
+ 
     %Controlador:
                 Kp(i)= Kc/Ami;
                 Kd(i)= (Td)*Kc/Ami;

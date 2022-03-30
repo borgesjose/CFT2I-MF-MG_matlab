@@ -30,9 +30,6 @@ if isequal(Itype,'NLI'),
 
 %INPUT SET NONLINEAR
 
-
-
-
 % Conjunto de ERROS NEGATIVOS T2:
 
 %Conjunto tipo 1 de base:  
@@ -44,6 +41,9 @@ if isequal(Itype,'NLI'),
 % Inferior:
    mi1(7)= 1-1./(1+exp(-v*x+c-theta(2)));
 
+   
+   
+   
    
     
     
