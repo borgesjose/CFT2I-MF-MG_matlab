@@ -14,17 +14,17 @@
 
 %clear; clc; close all;
 
-x=-2*L:1:2*L;
-y=-2*L:1:2*L;
+x=-2*L:.001:2*L;
+y=-2*L:.001:2*L;
 
 L = 2;
 M=[];
 M1=[];
 
-%gene = thebest{1:1}(1:16);
+gene = thebest{1:1}(1:8);
 % 
-Param = .1*L*ones(1,16);
-Param =[Param,1,1];
+%Param = .1*L*ones(1,16);
+Param =[gene,1,1];
 
 % 
  Itype = 'LI';

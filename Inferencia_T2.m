@@ -1,12 +1,17 @@
-function Am =inferencia(erro,rate,L,T,Itype)
-%%
-%% Maquina de inferencia TYPE-2
-%% 
-%%
-%% Autor: jose borges 
-%% Data: 04/03/2019
+function Am =inferencia_T2(erro,rate,L,T,Itype)
 
-[mi mo]=pertinencias_T2_NL(erro,rate,L,T,Itype);   % Pertinencias para variavel de entrada ERRO
+% Maquina de inferencia TYPE-2
+% 
+%
+% Autor: jose borges 
+% Data: 04/03/2019
+
+if (Itype == 'L')
+    [mi mo]=pertinencias_T2(erro,rate,L,T,Itype); % Pertinencias para variavel de entrada ERRO
+
+elseif (Itype == 'N')
+    [mi mo]=pertinencias_T2_NL(erro,rate,L,T,Itype); 
+end;
 
 % Forma do vetor mi
 % mi = [Nb,Zb,Pb,Zu,Zl,Nu,Nl,Pu,Pl]
@@ -24,7 +29,7 @@ Y(1,:) = [(exp(-R(1,1)*4)), (exp(-R(1,2)*4))];
 %REGRA 2: 
 
 R(2,:) = [mi(7)*mo(5),mi(6)*mo(4)];
-Y(2,:) = [(invgauss(R(2,1),0.5)),(invgauss(R(2,2),0.5))]
+Y(2,:) = [(invgauss(R(2,1),0.5)),(invgauss(R(2,2),0.5))];
 
 %REGRA 3: 
 

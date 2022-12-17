@@ -39,7 +39,7 @@
     eps = 0.2; 
     d = 0.5;
 
-    nptos = 1000
+    nptos = 2000
 
 % Chama a função rele com histerese passando os paramentros do rele e os polos e ganho do proceso de 2 ordem
 % Retorna o vetor yr, e ur com os resultados da aplicação do relé: 
@@ -54,7 +54,7 @@
 
 %% 3 Identificar os parametros a partir do experimento com relé:
 
-    [gw,w,arm,Kp]=identificar(n, d, eps,Tc,yr,ur);
+    [gw,w,arm,Kp] = identificar(n, d, eps,Tc,yr,ur);
 
     Ku = -1/gw;
     Tu = (2*pi)/w;
@@ -86,7 +86,9 @@
         H4 = 0.95;
         H = [H1,H1,H3,H4];
         
-        Param = .005*L*ones(1,8);
+        %Param = .005*L*ones(1,8);
+        %Param = [0.3940, 0.2893, 3.5104, 3.4723,  0.1847, 0.2262, 1.6028, 0.0236]
+        Param = [1.0674, 0.0391, 2.6422, 2.1878, 0.5146, 0.0330, 2.4236,  1.0000]
         Param =[Param,1,1];
         
         L = 2;
@@ -102,8 +104,17 @@
 for i=1:nptos,
     if (i<=nptos/2)  ref(i)=1; end;
     if (i>nptos/2)   ref(i) = 2; end;
-end 
+end
+patamar = 1
+passo = 1
+for i=1:nptos,
 
+            if (i<=nptos/4)  ref(i)= patamar; end;
+            if (i>nptos/4)   ref(i) = patamar + passo ; end;
+            if (i>nptos/2 & i<=3*nptos/4)  ref(i)= patamar + passo; end;
+            if (i>3*nptos/4)   ref(i) = patamar + 2*passo; end;
+
+        end ;
 
 for i=1:nptos,
     if(i>nptos/2 & i< 5+nptos/2 ) 
